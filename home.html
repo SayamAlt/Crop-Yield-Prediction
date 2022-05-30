@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Yield Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #bdfc35;
+        }
+        .navbar-brand {
+            display: block;
+            margin: auto;
+            color: #f04ada;
+            font-weight: bold;
+            font-family: "Helvetica";
+        }
+        .submit-button {
+            display: block;
+            margin: auto;
+        }
+        p {
+            text-align: center;
+        }
+        p:hover {
+            filter: brightness(150%);
+        }
+        .card {
+            display: block;
+            margin: auto;
+            text-align: center;
+        }
+        h5 {
+            font-weight: bold;
+            font-family: "Helvetica",sans;
+            color: #f0340e;
+            font-size: 1.8rem;
+        }
+        h1{
+            color: #16617a;
+            font-family: 'Georgia', serif;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        .first_row {
+            margin-top: 5rem;
+        }
+        .last_row {
+            margin-bottom: 2rem;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            margin: 0 auto;
+            float: none;
+            margin-bottom: 10px;
+            background-color: #99e889;
+            border: 2px solid #fc0330;
+            border-width: 0.5rem;
+            border-size: 6rem;
+            border-radius: 10%;
+        }
+        .copyright{
+            color: #bd08bd;
+            font-size: 1.5rem;
+            font-family: 'Arial',sans-serif;
+        }
+        .predict-dec {
+            text-align: center;
+            font-weight: bold;
+            color: ;
+            font-size: 2rem;
+            font-family: 'Helvetica',sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1"><h1>Crop Yield Prediction</h1></span>
+    </nav>
+    <div class="container">
+        <form action="/predict" method="post">
+            <div class="row first_row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Country:</h5>
+                            <select name="area" id="area" required="required">
+                                {% for reg in regions %}
+                                        <option value="{{reg}}" SELECTED>{{reg}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Item:</h5>
+                            <select name="item" id="item" required="required">
+                                {% for it in items %}
+                                        <option value="{{it}}" SELECTED>{{it}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Year:</h5>
+                            <input type="number" min="1990" max="2013" name="year" id="year" required="required">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Average Annual Rainfall(in mm):</h5>
+                            <input type="number" min="51.0" max="3240.0" step="0.1" name="avg_annual_rainfall_mm" id="avg_annual_rainfall_mm" required="required">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row last_row"> 
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Amount of Pesticides(in tonnes):</h5>
+                            <input type="number" min="0.04" max="367778.0" step="0.01" name="pesticides_tonnes" id="pesticides_tonnes" required="required">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Average Temperature(in °C):</h5>
+                            <input type="number" min="1.3" max="30.65" step="0.01" name="avg_temp" id="avg_temp" required="required">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <!-- Submit -->
+            <input type="submit" value="Submit" class="btn btn-primary submit-button">
+        </form>
+        <br>
+        <h3 class="predict-dec">{{ prediction_text }}</h3> 
+        <br>
+        <p class="copyright">@2022 Sayam Kumar</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+</html>
