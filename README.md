@@ -6,3 +6,9 @@ The science of training machines to learn and produce models for future predicti
 
 Crop yield prediction is an important agricultural problem. The Agricultural yield primarily depends on weather conditions (rain, temperature, etc), pesticides and accurate information about history of crop yield is an important thing for making decisions related to agricultural risk management and future predictions.
 
+## Acknowledgements
+
+All dataset(publicly available dataset) here are taken form FAO (Food and Agriculture Organization) and World Data Bank.
+http://www.fao.org/home/en/
+https://data.worldbank.org/
+
